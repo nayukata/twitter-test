@@ -9,11 +9,12 @@
       </div>
       <v-card>
         <v-card-title class="headline">
-          index
+          Comatter
         </v-card-title>
         <v-card-text>
-          <postTweet />
+          <Tweets :posts="posts" />
           <hr class="my-3" />
+          <Form @posted="addTweet" />
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -25,15 +26,24 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
-import PostTweet from '~/components/PostTweet.vue'
+import Tweets from '~/components/Tweets.vue'
+import Form from '~/components/Form.vue'
+
 export default {
   components: {
     Logo,
-    PostTweet
+    Tweets,
+    Form
   },
   data() {
     return {
-      message: '夏目'
+      message: "it's over",
+      posts: ['コードかきかき', '準備中']
+    }
+  },
+  methods: {
+    addTweet(newTweet) {
+      this.posts.push(newTweet)
     }
   }
 }
