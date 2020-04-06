@@ -3,7 +3,7 @@
     <div v-for="post in posts" :key="post" class="container">
       <div class="row" style="display: flex; position: relative">
         <div class="tweet-content row-10">
-          {{ post }}
+          {{ post.content }}
         </div>
         <v-btn class="delete-button" @click="deleteTweet(key)">削除</v-btn>
       </div>
@@ -11,15 +11,13 @@
   </div>
 </template>
 
-<script scoped>
+<script>
 export default {
   props: {
     posts: Array
   },
   data() {
-    return {
-      editId: false
-    }
+    return {}
   },
   computed: {},
   methods: {
@@ -30,7 +28,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .tweet-content {
   width: 40rem;
   padding: 20px 30px;
