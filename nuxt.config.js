@@ -1,5 +1,15 @@
 import colors from 'vuetify/es5/util/colors'
 
+require('dotenv').config()
+const {
+  FB_API_KEY,
+  FB_PROJEDCTID,
+  FB_AUTH_DOMAIN,
+  FB_DATABASE_URL,
+  FB_STRAGE_BUCKET,
+  FB_MASSAGING_SENDER_ID
+} = process.env
+
 export default {
   mode: 'universal',
   /*
@@ -30,7 +40,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/firebase.js'],
+  plugins: [],
   /*
    ** Nuxt.js dev-modules
    */
@@ -72,5 +82,13 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  env: {
+    FB_API_KEY,
+    FB_PROJEDCTID,
+    FB_AUTH_DOMAIN,
+    FB_DATABASE_URL,
+    FB_STRAGE_BUCKET,
+    FB_MASSAGING_SENDER_ID
   }
 }

@@ -4,6 +4,7 @@ import 'firebase/firestore'
 import 'firebase/functions'
 import 'firebase/storage'
 
+console.log(process.env.FB_PROJECTID)
 const config = {
   apiKey: process.env.FB_API_KEY,
   authDomain: process.env.FB_AUTH_DOMAIN,
@@ -12,6 +13,7 @@ const config = {
   storageBucket: process.env.FB_STORAGE_BUCKET,
   messagingSenderId: process.env.FB_MESSAGING_SENDER_ID
 }
+
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
 }

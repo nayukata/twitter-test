@@ -7,52 +7,56 @@
       <div>
         {{ message }}
       </div>
-      <v-card>
+      <v-btn @click="getPosts">テスト</v-btn>
+      <!-- <v-card>
         <v-card-title class="headline">
           Comatter
         </v-card-title>
         <v-card-text>
-          <Tweets :posts="getPosts" />
+          <Tweets :posts="posts" />
           <hr class="my-3" />
           <Form @posted="addTweet" />
         </v-card-text>
         <v-card-actions>
           <v-spacer />
         </v-card-actions>
-      </v-card>
+      </v-card> -->
     </v-flex>
   </v-layout>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
-import Tweets from '~/components/Tweets.vue'
-import Form from '~/components/Form.vue'
-import firebase from '~/plugins/firebase.js'
-
-const db = firebase.firestore()
-db.setting({ timestampsInSnapshots: true })
+// import Tweets from '~/components/Tweets.vue'
+// import Form from '~/components/Form.vue'
+import { db } from '~/utils/firebase.js'
 
 export default {
   components: {
-    Logo,
-    Tweets,
-    Form
+    Logo
+    // Tweets,
+    // Form
   },
-
+  // async asyncData() {
+  //   const posts = await db
+  //     .collection('posts')
+  //     .orderBy('created_at', 'asc')
+  //     .get()
+  //   return { posts }
+  // },
   data() {
     return {
-      message: "it's over",
-      posts: ['コードかきかき', '準備中']
+      message: "it's over"
     }
   },
   methods: {
     // データを全件取得
     getPosts() {
-      return db
+      const data = db
         .collection('posts')
         .orderBy('created_at', 'asc')
         .get()
+      console.log(data)
     },
     addTweet(newTweet) {
       this.posts.push(newTweet)
