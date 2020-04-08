@@ -1,28 +1,46 @@
 <template>
   <div class="posts" style="width: 95%;">
-    <div v-for="post in posts" :key="post" class="container">
+    <div v-for="post in posts" :key="post.uid" class="container">
       <div class="row" style="display: flex; position: relative">
         <div class="tweet-content row-10">
           {{ post.content }}
         </div>
-        <v-btn class="delete-button" @click="deleteTweet(key)">削除</v-btn>
+        <v-btn class="delete-button" @click="deleteTweet(post.uid)"
+          ><v-icon small color="white">mdi-delete-outline</v-icon> 削除
+        </v-btn>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { db } from '~/utils/firebase.js'
+
 export default {
   props: {
-    posts: Array
+    posts: {
+      type: Array,
+      required: true,
+      default: () => ({
+        content: 'now loading'
+      })
+    }
   },
+
   data() {
     return {}
   },
   computed: {},
   methods: {
-    deleteTweet(key) {
-      this.$emit('deleted', key)
+    async deleteTweet(postId) {
+      await db
+        .collection('posts')
+        .doc(postId)
+        .delete()
+        .then(function() {
+          console.log('Document successfuly deleted')
+        })
+      this.$emit('post-deleted', postId)
     }
   }
 }

@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row">
       <textarea
-        v-model="tweet"
-        class="tweet-form col-10"
+        v-model="post.content"
+        class="tweet-form col-9"
         rows="4"
         cols="40"
         type="text"
@@ -12,7 +12,7 @@
         color="primary"
         style="height: 4rem;"
         class="form-button col-2 my-auto"
-        @click="postTweet"
+        @click="submit"
         >投稿する
       </v-btn>
     </div>
@@ -20,16 +20,33 @@
 </template>
 
 <script>
+import { db } from '~/utils/firebase.js'
+
 export default {
   data() {
     return {
-      tweet: ''
+      post: {
+        content: '',
+        created_at: new Date()
+      }
     }
   },
   methods: {
-    postTweet() {
-      this.$emit('posted', this.tweet)
-      this.message = ''
+    async submit() {
+      await db
+        .collection('posts')
+        .doc()
+        .set(this.getPost())
+
+      console.log('Form.vue' + this.post)
+
+      this.$emit('add-post-to-array', this.post)
+      this.post.content = ''
+      this.post.created_at = ''
+    },
+    getPost() {
+      this.post.created_at = new Date()
+      return this.post
     }
   }
 }
@@ -37,6 +54,7 @@ export default {
 <style scoped>
 .tweet-form {
   padding: 5px;
+  margin-left: 1rem;
   width: 85%;
   height: 5rem;
   border-radius: 3px;

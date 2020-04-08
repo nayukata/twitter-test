@@ -2,17 +2,11 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
       <div class="text-center">
-        <logo />
+        <p>新規登録</p>
       </div>
-      <v-card>
-        <v-card-title class="headline">
-          Comatter
-        </v-card-title>
-        <v-card-text> </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-        </v-card-actions>
-      </v-card>
+      <v-card-actions>
+        <v-spacer />
+      </v-card-actions>
     </v-flex>
   </v-layout>
 </template>

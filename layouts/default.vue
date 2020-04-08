@@ -22,13 +22,23 @@
     </v-content>
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
       <v-list>
-        <v-list-item @click.native="right = !right">
+        <v-list-item>
           <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
+            <v-icon light color="white">
+              mdi-account
             </v-icon>
           </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
+          <v-list-item-title>新規登録</v-list-item-title>
+        </v-list-item>
+      </v-list>
+      <v-list>
+        <v-list-item>
+          <v-list-item-action>
+            <v-icon light color="white">
+              mdi-login
+            </v-icon>
+          </v-list-item-action>
+          <v-list-item-title>ログイン</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -65,3 +75,4 @@ export default {
   }
 }
 </script>
+<style></style>
