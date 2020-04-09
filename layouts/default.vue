@@ -28,7 +28,9 @@
               mdi-account
             </v-icon>
           </v-list-item-action>
-          <v-list-item-title>新規登録</v-list-item-title>
+          <nuxt-link to="/Register">
+            <v-list-item-title>新規登録</v-list-item-title>
+          </nuxt-link>
         </v-list-item>
       </v-list>
       <v-list>
@@ -38,7 +40,9 @@
               mdi-login
             </v-icon>
           </v-list-item-action>
-          <v-list-item-title>ログイン</v-list-item-title>
+          <nuxt-link to="/">
+            <v-list-item-title>ログイン</v-list-item-title>
+          </nuxt-link>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>

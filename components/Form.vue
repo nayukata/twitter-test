@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <textarea
-        v-model="post.content"
+        v-model="content"
         class="tweet-form col-9"
         rows="4"
         cols="40"
@@ -25,28 +25,23 @@ import { db } from '~/utils/firebase.js'
 export default {
   data() {
     return {
-      post: {
-        content: '',
-        created_at: new Date()
-      }
+      content: ''
     }
   },
   methods: {
     async submit() {
-      await db
-        .collection('posts')
-        .doc()
-        .set(this.getPost())
+      const ref = db.collection('post').doc()
 
-      console.log('Form.vue' + this.post)
+      const id = ref.id
+      const post = {
+        content: this.content,
+        created_at: new Date(),
+        updated_at: new Date()
+      }
+      await ref.set(post)
 
-      this.$emit('add-post-to-array', this.post)
-      this.post.content = ''
-      this.post.created_at = ''
-    },
-    getPost() {
-      this.post.created_at = new Date()
-      return this.post
+      this.$emit('add-post-to-array', { ...post, uid: id })
+      this.content = ''
     }
   }
 }
