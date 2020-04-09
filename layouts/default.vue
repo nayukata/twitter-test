@@ -1,13 +1,5 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      v-navigation-drawer
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    />
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title v-text="title" />
       <v-spacer />
