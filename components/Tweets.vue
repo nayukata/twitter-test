@@ -1,29 +1,36 @@
 <template>
-  <div class="posts" style="width: 95%;">
-    <div v-for="post in posts" :key="post.uid" class="container">
-      <div class="row" style="position: relative">
-        <div class="tweet-content row-10">
-          <p v-if="post.isActive !== true">
-            {{ post.content }}
-          </p>
-          <textarea
-            v-else
-            v-model="content"
-            cols="30"
-            rows="3"
-            @change="updated(post)"
-          >
-          </textarea>
-          <p color="white">{{ content }}</p>
+  <div class="posts" style="width 1500px;">
+    <transition-group tag="ul" class="list">
+      <div
+        v-for="(post, index) in posts"
+        :key="post.uid"
+        :data-index="index"
+        class="container"
+      >
+        <div class="row" style="position: relative">
+          <div class="tweet-content row-10">
+            <p v-if="post.isActive !== true">
+              {{ post.content }}
+            </p>
+            <textarea
+              v-else
+              v-model="content"
+              cols="30"
+              rows="3"
+              @change="updated(post)"
+            >
+            </textarea>
+            <p color="white">{{ content }}</p>
+          </div>
+          <v-btn class="edit-button" @click="activate(post)"
+            ><v-icon small color="white">mdi-square-edit-outline</v-icon> 編集
+          </v-btn>
+          <v-btn class="delete-button" @click="deleteTweet(post.uid)"
+            ><v-icon small color="white">mdi-delete-outline</v-icon> 削除
+          </v-btn>
         </div>
-        <v-btn class="edit-button" @click="activate(post)"
-          ><v-icon small color="white">mdi-square-edit-outline</v-icon> 編集
-        </v-btn>
-        <v-btn class="delete-button" @click="deleteTweet(post.uid)"
-          ><v-icon small color="white">mdi-delete-outline</v-icon> 削除
-        </v-btn>
       </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -96,5 +103,19 @@ export default {
   position: absolute;
   bottom: 2px;
   right: 65px;
+}
+.v-enter-active,
+.v-leave-active,
+.v-move {
+  transition: all 1s, opacity 1s;
+}
+
+.v-leave-active {
+  position: absolute;
+}
+.v-enter,
+.v-leave-to {
+  transform: TransformX(30px);
+  opacity: 0;
 }
 </style>
