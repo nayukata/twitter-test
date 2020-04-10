@@ -12,20 +12,28 @@
         <nuxt />
       </v-container>
     </v-content>
+
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item>
-          <v-list-item-action>
-            <v-icon light color="white">
-              mdi-account
-            </v-icon>
-          </v-list-item-action>
-          <nuxt-link to="/Register">
-            <v-list-item-title>新規登録</v-list-item-title>
-          </nuxt-link>
-        </v-list-item>
-      </v-list>
-      <v-list>
+      <transition
+        appear=""
+        @before-enter="beforeEnter"
+        @after-enter="afterEnter"
+        @enter-cancelled="afterEnter"
+      >
+        <v-list>
+          <v-list-item>
+            <v-list-item-action>
+              <v-icon light color="white">
+                mdi-account
+              </v-icon>
+            </v-list-item-action>
+            <nuxt-link to="/Register">
+              <v-list-item-title>新規登録</v-list-item-title>
+            </nuxt-link>
+          </v-list-item>
+        </v-list>
+      </transition>
+      <v-list :key="2" :data-index="2">
         <v-list-item>
           <v-list-item-action>
             <v-icon light color="white">
@@ -38,6 +46,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
     <v-footer :fixed="fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -68,7 +77,31 @@ export default {
       rightDrawer: false,
       title: 'Vuetify.js'
     }
+  },
+  methods: {
+    beforeEnter(el) {
+      el.style.transitionDelay = 100 * parseInt(el.dataset.index, 10) + 'ms'
+    },
+    afterEnter(el) {
+      el.style.transitionDelay = ''
+    }
   }
 }
 </script>
-<style></style>
+<style>
+.v-enter-active,
+.v-leave-active,
+.v-move {
+  transition: 2s, transform 2s;
+}
+
+.v-leave-active {
+  position: absolute;
+}
+.v-enter {
+  transform: TransformX(-20px);
+}
+.v-leave-to {
+  transform: TransformX(20px);
+}
+</style>
