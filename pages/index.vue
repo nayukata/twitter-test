@@ -4,13 +4,12 @@
       <div>
         {{ message }}
       </div>
-      <v-btn @click="getPosts">テスト</v-btn>
       <v-card>
         <v-card-title class="headline">
           Comatter
         </v-card-title>
-        <Form class="mx-3" @add-post-to-array="addPost" />
-        <hr class="my-3" />
+        <Form class="mx-2" @add-post-to-array="addPost" />
+        <hr />
         <v-card-text>
           <Tweets
             :posts="posts"

@@ -21,7 +21,7 @@
               :disabled="!valid"
               color="primary"
               style="height: 4rem;"
-              class="form-button col-2 my-auto"
+              class="form-button my-auto"
               @click="submit"
               >投稿する
             </v-btn>
@@ -83,7 +83,6 @@ export default {
 }
 
 .form-button {
-  width: 20%;
   height: 8rem;
   margin-left: 15px;
 }
