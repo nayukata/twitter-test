@@ -4,7 +4,6 @@ import 'firebase/firestore'
 import 'firebase/functions'
 import 'firebase/storage'
 
-console.log(process.env.FB_PROJECTID)
 const config = {
   apiKey: process.env.FB_API_KEY,
   authDomain: process.env.FB_AUTH_DOMAIN,
